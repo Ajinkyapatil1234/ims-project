@@ -1,3 +1,6 @@
+<img width="1280" height="892" alt="WhatsApp Image 2026-05-04 at 7 20 23 PM" src="https://github.com/user-attachments/assets/a8cb1a01-f57b-43c6-b17e-fc58816c5f22" />
+<img width="1280" height="906" alt="WhatsApp Image 2026-05-04 at 7 20 23 PM (1)" src="https://github.com/user-attachments/assets/b54dd6c9-179a-4cf8-901d-668abae1a79a" />
+<img width="1280" height="960" alt="WhatsApp Image 2026-05-04 at 7 20 23 PM (2)" src="https://github.com/user-attachments/assets/6996a800-36af-4532-ad45-54f7ec8b7120" />
 #  Incident Management System (IMS)
 
 A simple Incident Management System built using FastAPI, PostgreSQL, Redis, and Docker to simulate real-world SRE/DevOps incident workflows.
