@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Incident Dashboard</title>
+</head>
+<body>
+
+<h2>Incident Dashboard</h2>
+
+<button onclick="loadIncidents()">Refresh</button>
+
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Component</th>
+            <th>Status</th>
+            <th>Severity</th>
+            <th>Created</th>
+            <th>Resolved</th>
+            <th>MTTR (sec)</th>
+        </tr>
+    </thead>
+    <tbody id="incidentTable"></tbody>
+</table>
+
+<hr>
+
+<h3>Create Incident</h3>
+<input id="component" placeholder="Component"><br><br>
+
+<select id="severity">
+    <option value="P0">P0</option>
+    <option value="P1">P1</option>
+    <option value="P2">P2</option>
+</select><br><br>
+
+<input id="description" placeholder="Description"><br><br>
+
+<button onclick="createIncident()">Create</button>
+
+<hr>
+
+<h3>Resolve Incident</h3>
+<input id="resolveId" placeholder="Incident ID"><br><br>
+<input id="rca" placeholder="RCA"><br><br>
+<button onclick="resolveIncident()">Resolve</button>
+
+<script>
+const API = "http://localhost:8000";
+
+// ------------------- LOAD INCIDENTS -------------------
+async function loadIncidents() {
+    const res = await fetch(`${API}/incidents`);
+    const data = await res.json();
+
+    const table = document.getElementById("incidentTable");
+    table.innerHTML = "";
+
+    data.forEach(i => {
+        let mttr = "";
+
+        if (i.created && i.resolved) {
+            const created = new Date(i.created);
+            const resolved = new Date(i.resolved);
+            mttr = Math.floor((resolved - created) / 1000);
+        }
+
+        table.innerHTML += `
+            <tr>
+                <td>${i.id}</td>
+                <td>${i.component}</td>
+                <td>${i.status}</td>
+                <td>${i.severity}</td>
+                <td>${i.created || ""}</td>
+                <td>${i.resolved || ""}</td>
+                <td>${mttr}</td>
+            </tr>
+        `;
+    });
+}
+
+// ------------------- CREATE INCIDENT -------------------
+async function createIncident() {
+    const component = document.getElementById("component").value;
+    const severity = document.getElementById("severity").value;
+    const description = document.getElementById("description").value;
+
+    if (!component || !description) {
+        alert("Component and Description required");
+        return;
+    }
+
+    const res = await fetch(`${API}/incidents`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            component,
+            severity,
+            description
+        })
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+        alert(data.error);
+    } else {
+        alert("Incident created");
+        loadIncidents();
+    }
+}
+
+// ------------------- RESOLVE INCIDENT -------------------
+async function resolveIncident() {
+    const id = document.getElementById("resolveId").value;
+    const rca = document.getElementById("rca").value;
+
+    if (!id || !rca) {
+        alert("Incident ID and RCA required");
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API}/resolve/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ rca: rca })
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert("Incident resolved");
+            loadIncidents();
+        }
+
+    } catch (err) {
+        alert("Error resolving incident");
+    }
+}
+
+// ------------------- AUTO LOAD -------------------
+loadIncidents();
+</script>
+
+</body>
+</html>
