@@ -116,5 +116,5 @@ curl -X POST http://localhost:8000/signal
 ##  Author
 
 Ajinkya Patil  
-DevOps / Cloud Enthusia
+DevOps / Cloud Enthusiast
 
