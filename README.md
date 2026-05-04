@@ -48,7 +48,7 @@ Redis Queue → Worker → Incident Processing
 
 ### 1. Clone repository
 
-git clone 
+git clone https://github.com/Ajinkyapatil1234/ims-project.git
 cd ims-project  
 
 ---
