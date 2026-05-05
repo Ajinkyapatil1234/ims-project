@@ -47,13 +47,13 @@ Redis Queue → Worker → Incident Processing
 
 ---
 
-## 🔄 Backpressure Handling
+##  Backpressure Handling
 
 To handle high throughput and prevent system overload, Redis is used as a queue to decouple signal ingestion from processing. This ensures the system remains stable during bursts of incoming signals and prevents direct load on the database.
 
 ---
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone repository
 
