@@ -1,0 +1,5 @@
+{
+  "component": "RDBMS",
+  "severity": "P0",
+  "description": "Database connection failure"
+}
