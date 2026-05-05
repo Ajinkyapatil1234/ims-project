@@ -65,6 +65,7 @@ docker-compose up --build
 ### 3. Run Frontend 
 
 cd frontend
+
 python3 -m http.server 5500
 
 ### 4. Access the application
