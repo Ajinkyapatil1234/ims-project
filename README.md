@@ -81,7 +81,7 @@ python3 -m http.server 5500
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Create Incident  
 POST /incidents  
