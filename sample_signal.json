@@ -1,5 +1,12 @@
-{
-  "component": "RDBMS",
-  "severity": "P0",
-  "description": "Database connection failure"
-}
+[
+  {
+    "component": "RDBMS",
+    "severity": "P0",
+    "description": "Database outage"
+  },
+  {
+    "component": "MCP",
+    "severity": "P1",
+    "description": "Downstream failure after DB outage"
+  }
+]
