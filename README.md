@@ -62,7 +62,12 @@ docker-compose up --build
 
 ---
 
-### 3. Access the application
+### 3. Run Frontend 
+
+cd frontend
+python3 -m http.server 5500
+
+### 4. Access the application
 
 - Frontend UI: http://localhost:5500  
 - Backend API (Swagger): http://localhost:8000/docs  
