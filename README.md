@@ -47,6 +47,15 @@ Redis Queue → Worker → Incident Processing
 
 ---
 
+##  Architecture Diagram
+
+Frontend → FastAPI → PostgreSQL  
+                 ↓  
+               Redis → Worker
+
+---
+
+
 ##  Backpressure Handling
 
 To handle high throughput and prevent system overload, Redis is used as a queue to decouple signal ingestion from processing. This ensures the system remains stable during bursts of incoming signals and prevents direct load on the database.
